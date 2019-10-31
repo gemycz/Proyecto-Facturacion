@@ -34,15 +34,13 @@
 				$clientes= new Database();
 				if(isset($_POST) && !empty($_POST)){
 					$nombre = $clientes->sanitize($_POST['nombre']);
-					$alias = $clientes->sanitize($_POST['alias']);
-					$face = $clientes->sanitize($_POST['face']);
-					$whats = $clientes->sanitize($_POST['whats']);
-					$zip = $clientes->sanitize($_POST['zip']);
 					$direccion = $clientes->sanitize($_POST['direccion']);
 					$telefono = $clientes->sanitize($_POST['telefono']);
-					$correo_electronico = $clientes->sanitize($_POST['correo_electronico']);
+					$cedula = $clientes->sanitize($_POST['cedula']);
+					$email = $clientes->sanitize($_POST['email']);
 					
-					$res = $clientes->create($nombre, $alias,$face,$whats,$zip,$direccion,$telefono,$correo_electronico);
+					
+					$res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email);
 					if($res){
 						$message= "Datos insertados con éxito";
 						$class="alert alert-success";
@@ -66,35 +64,22 @@
 					<input type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Alias:</label>
-					<input type="text" name="alias" id="alias" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-md-6">
-					<label>Facebook:</label>
-					<input type="text" name="face" id="face" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-md-6">
-					<label>Whatsapp:</label>
-					<input type="text" name="whats" id="whats" class='form-control' maxlength="100" required>
-				</div>
-				<div class="col-md-6">
-					<label>Zip:</label>
-					<input type="text" name="zip" id="zip" class='form-control' maxlength="100" required>
-				</div>
-				<div class="col-md-12">
 					<label>Dirección:</label>
-					<textarea  name="direccion" id="direccion" class='form-control' maxlength="255" required></textarea>
+					<input type="text" name="direccion" id="direccion" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
 					<label>Teléfono:</label>
-					<input type="text" name="telefono" id="telefono" class='form-control' maxlength="15" required >
+					<input type="text" name="telefono" id="telefono" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Correo electrónico:</label>
-					<input type="email" name="correo_electronico" id="correo_electronico" class='form-control' maxlength="64" required>
-				
+					<label>Cedula:</label>
+					<input type="text" name="cedula" id="cedula" class='form-control' maxlength="100" required>
 				</div>
-				
+				<div class="col-md-6">
+					<label>Email:</label>
+					<input type="email" placeholder="Ej.: usuario@servidor.com" name="email" id="email" class='form-control' maxlength="100" required>
+				</div>
+			
 				<div class="col-md-12 pull-right">
 				<hr>
 					<button type="submit" class="btn btn-success">Guardar datos</button>

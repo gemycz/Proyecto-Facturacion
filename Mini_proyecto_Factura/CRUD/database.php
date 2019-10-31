@@ -24,7 +24,7 @@
 			$return = mysqli_real_escape_string($this->con, $var);
 			return $return;
 		}
-		public function create($nombre, $alias,$face,$whats,$zip,$direccion,$telefono,$correo_electronico){
+		public function create($nombre,$direccion,$telefono,$cedula,$email){
 			$sql = "INSERT INTO `cliente` (nombre_cli, direccion_cli, telefono_cli, cedula_cli, email_cli) VALUES ('$nombre','$direccion', '$telefono', '$cedula', '$email')";
 			$res = mysqli_query($this->con, $sql);
 			if($res){

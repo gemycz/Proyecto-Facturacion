@@ -17,13 +17,13 @@ drop table if exists PRODUCTO;
 /*==============================================================*/
 create table CLIENTE
 (
-   ID_CLI               int not null,
+   ID_CLI               int AUTO_INCREMENT not null ,
    NOMBRE_CLI           varchar(50),
    DIRECCION_CLI        varchar(100),
    TELEFONO_CLI         varchar(10),
    CEDULA_CLI           varchar(10),
    EMAIL_CLI            varchar(100),
-   primary key (ID_CLI)
+   primary key (ID_CLI) 
 );
 
 /*==============================================================*/
@@ -31,13 +31,13 @@ create table CLIENTE
 /*==============================================================*/
 create table DETALLE_FACTURA
 (
-   ID_FAC               int not null,
+   ID_FAC               int AUTO_INCREMENT not null,
    ID_PRO               int not null,
    ID_DETFACT           int,
    CANT_DETFACT         int,
    VALORTOTAL_DETFACT   float,
    PRECIO_DETFACT       float,
-   primary key (ID_FAC, ID_PRO)
+   primary key (ID_FAC, ID_PRO)  
 );
 
 /*==============================================================*/
@@ -45,12 +45,12 @@ create table DETALLE_FACTURA
 /*==============================================================*/
 create table FACTURA
 (
-   ID_FAC               int not null,
+   ID_FAC               int  AUTO_INCREMENT not null,
    ID_CLI               int,
    SUBTOTAL_FAC         float,
    IVA_FAC              float,
    TOTAL_TAC            float,
-   primary key (ID_FAC)
+   primary key (ID_FAC)  
 );
 
 /*==============================================================*/
@@ -58,12 +58,12 @@ create table FACTURA
 /*==============================================================*/
 create table PRODUCTO
 (
-   ID_PRO               int not null,
+   ID_PRO               int AUTO_INCREMENT not null ,
    NOMBRE_PRO           varchar(50),
    CODIGO_PRO           int,
    CANTIDAD_PRO         int,
    PRECIO_PRO           float,
-   primary key (ID_PRO)
+   primary key (ID_PRO)   
 );
 
 alter table DETALLE_FACTURA add constraint FK_DETALLE_FACTURA foreign key (ID_FAC)

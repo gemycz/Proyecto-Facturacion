@@ -45,14 +45,11 @@
                     <tr>
                         <th style="width: 3%;">Id</th>
                         <th>Nombre</th>
-                        <th>Alias</th>
-                        <th>Facebook</th>
-                        <th>Whatsapp</th>
-                        <th style="width: 8%;">Zip</th>
-						<th>Dirección</th>
-                        <th style="width: 9%;">Teléfono</th>
+                        <th>Dirección</th>
+                         <th style="width: 9%;">Teléfono</th>
+                        <th>Cedula</th>
                         <th>E-mail</th>
-                        <th>Acciones</th>
+                        
                     </tr>
                 </thead>
 				<?php 
@@ -63,27 +60,21 @@
                 <tbody>
 				<?php 
 					while ($row=mysqli_fetch_object($listado)){
-						$rowid=$row->rowid;
-						$nom=$row->nom;
-						$name_alias=$row->name_alias;
-						$facebook=$row->facebook;
-						$whatsapp=$row->whatsapp;
-						$zip=$row->zip;
-                        $address=$row->address;
-                        $phone=$row->phone;
-                        $email=$row->email;
+					    $rowid=$row->id_cli;
+					    $nombre=$row->nombre_cli;
+					    $direccion=$row->direccion_cli;
+					    $telefono=$row->telefono_cli;
+					    $cedula=$row->cedula_cli;
+					    $email=$row->email_cli;
 				?>
 					<tr>
                         <th><?php echo $rowid;?></th>
-                        <td><?php echo $nom;?></td>
-                        <td type="password"><?php echo $name_alias;?></td>
-                        <td><?php echo $facebook;?></td>
-                        <td><?php echo $whatsapp;?></td>
-						<td><?php echo $zip;?></td>
-                        <td><?php echo $address;?></td>
-                        <td><?php echo $phone;?></td>
+                        <td><?php echo $nombre;?></td>
+                        <td><?php echo $direccion;?></td>
+                        <td><?php echo $telefono;?></td>
+                        <td><?php echo $cedula;?></td>
                         <td><?php echo $email;?></td>
-                   
+					
                         <td>
 						    <a href="update.php?id=<?php echo $rowid;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                             <a href="delete.php?id=<?php echo $rowid;?>" class="delete" title="Eliminar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
