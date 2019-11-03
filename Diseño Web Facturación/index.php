@@ -42,7 +42,7 @@
               </li>
               -->
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
-               <li><a class="icon-doc-text-inv" href="../Mini_proyecto_Factura/CRUD/index.php">Lista de clientes</a></li>
+               <li><a class="icon-doc-text-inv" href="../CRUD/index.php">Lista de clientes</a></li>
                <li><a class="icon-doc-text-inv" href="index.php">Lista de Productos</a></li>
             </ul>
         </nav>
