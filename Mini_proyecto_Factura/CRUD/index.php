@@ -48,7 +48,8 @@
                         <th>Dirección</th>
                          <th style="width: 9%;">Teléfono</th>
                         <th>Cedula</th>
-                        <th>E-mail</th>
+                        <th >E-mail</th>
+                        <th>Acciones</th>
                         
                     </tr>
                 </thead>

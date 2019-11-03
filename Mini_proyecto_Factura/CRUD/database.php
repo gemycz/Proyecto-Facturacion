@@ -8,7 +8,7 @@
 		private $con;
 		private $dbhost="localhost";
 		private $dbuser="root";
-		private $dbpass="";
+		private $dbpass="toor2019gc";
 		private $dbname="factura";
 		function __construct(){
 			$this->connect_db();
@@ -38,12 +38,18 @@
 			$res = mysqli_query($this->con, $sql);
 			return $res;
 		}
+		
 		public function read2($buscar){
 			$sql = "SELECT id_cli, nombre_cli, direccion_cli, telefono_cli, cedula_cli, email_cli FROM cliente where nombre_cli ='$buscar'";
 			$res = mysqli_query($this->con, $sql);
 			return $res;
 		}
 		
+		public function buscar_cedula($cedula){
+		    $sql = "SELECT id_cli, nombre_cli, direccion_cli, telefono_cli, cedula_cli, email_cli FROM cliente where cedula_cli ='$cedula'";
+		    $res = mysqli_query($this->con, $sql);
+		    return $res;
+		}
 		
 		public function single_record($id){
 			$sql = "SELECT id_cli, nombre_cli, direccion_cli, telefono_cli, cedula_cli, email_cli FROM cliente where id_cli ='$id'";
@@ -51,6 +57,10 @@
 			$return = mysqli_fetch_object($res );
 			return $return ;
 		}
+		
+		
+		
+		
 		public function update($nombre,$direccion,$telefono,$cedula,$email, $id){
 			$sql = "UPDATE cliente SET nombre_cli ='$nombre', direccion_cli ='$direccion', telefono_cli ='$telefono', cedula_cli ='$cedula', email_cli ='$email' WHERE id_cli = $id";
 			$res = mysqli_query($this->con, $sql);

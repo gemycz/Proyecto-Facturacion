@@ -22,7 +22,7 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2>Agregar <b>Cliente</b></h2></div>
+                    <div class="col-sm-8"><h2>Agregar<b>Producto</b></h2></div>
                     <div class="col-sm-4">
                         <a href="index.php" class="btn btn-info add-new"><i class="fa fa-arrow-left"></i> Regresar</a>
                     </div>
@@ -30,17 +30,16 @@
             </div>
             <?php
             //$usuario,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id
-				include ("database.php");
-				$clientes= new Database();
+				include ("databasePro.php");
+				$producto= new Database();
 				if(isset($_POST) && !empty($_POST)){
-					$nombre = $clientes->sanitize($_POST['nombre']);
-					$direccion = $clientes->sanitize($_POST['direccion']);
-					$telefono = $clientes->sanitize($_POST['telefono']);
-					$cedula = $clientes->sanitize($_POST['cedula']);
-					$email = $clientes->sanitize($_POST['email']);
+				    $nomPro = $producto->sanitize($_POST['nomPro']);
+					$codigo = $producto->sanitize($_POST['codigo']);
+					$cantidad = $producto->sanitize($_POST['cantidad']);
+					$precio = $producto->sanitize($_POST['precio']);
+							
 					
-					
-					$res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email);
+					$res = $producto->create($nomPro,$codigo,$cantidad,$precio);
 					if($res){
 						$message= "Datos insertados con éxito";
 						$class="alert alert-success";
@@ -60,33 +59,29 @@
 			<div class="row">
 				<form method="post">
 				<div class="col-md-6">
-					<label>Nombres:</label>
-					<input type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
+					<label>Nombres Producto:</label>
+					<input type="text" name="nomPro" id="nomPro" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Dirección:</label>
-					<input type="text" name="direccion" id="direccion" class='form-control' maxlength="100" required >
+					<label>Codigo:</label>
+					<input type="text" name="codigo" id="codigo" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Teléfono:</label>
-					<input type="tel" size="10" pattern="[0-9]{10}" placeholder="Ej.: 0999999999" name="telefono" id="telefono" class='form-control' maxlength="100" required >
+					<label>Cantidad:</label>
+					<input type="text" name="cantidad" id="cantidad" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Cedula:</label>
-					<input type="text" name="cedula" size="10" id="cedula" class='form-control' maxlength="100" required>
-				</div>
-				<div class="col-md-6">
-					<label>Email:</label>
-					<input type="email" placeholder="Ej.: usuario@servidor.com" name="email" id="email" class='form-control' maxlength="100" required>
+					<label>Precio:</label>
+					<input type="text" name="precio" id="precio" class='form-control' maxlength="100" required>
 				</div>
 			
 				<div class="col-md-12 pull-right">
 				<hr>
-					<button type="submit" class="btn btn-success">Guardar datos</button>
+					<button type="submit" class="btn btn-success">Guardar Producto</button>
 				</div>
 				</form>
 			</div>
         </div>
     </div>     
 </body>
-</html>                            
+</html>     
