@@ -13,6 +13,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+
+
 </head>
 <body><br><br>
 	<center><img src="MiFamiliaProtegida.png" width="500"></center>
@@ -28,6 +31,7 @@
                     </div>
                 </div>
             </div>
+           
             <?php
             //$usuario,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id
 				include ("database.php");
@@ -57,7 +61,8 @@
 				}
 	
 			?>
-			<div class="row">
+			<div id="form" class="row">
+				
 				<form method="post">
 				<div class="col-md-6">
 					<label>Nombres:</label>
@@ -72,8 +77,15 @@
 					<input type="tel" size="10" pattern="[0-9]{10}" placeholder="Ej.: 0999999999" name="telefono" id="telefono" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
+				
 					<label>Cedula:</label>
-					<input type="text" name="cedula" size="10" id="cedula" class='form-control' maxlength="100" required>
+					<input type="text" name="cedula" size="10" id="cedula" pattern="[0-9]{10}" class='form-control' maxlength="100" required>
+					<div id="mensaje"></div>
+					 <script src="js/validar_cedula.js" type="text/javascript">
+                      
+                	 </script>
+					
+					
 				</div>
 				<div class="col-md-6">
 					<label>Email:</label>
@@ -82,7 +94,7 @@
 			
 				<div class="col-md-12 pull-right">
 				<hr>
-					<button type="submit" class="btn btn-success">Guardar datos</button>
+					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Guardar datos</button>
 				</div>
 				</form>
 			</div>
