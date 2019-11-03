@@ -8,7 +8,7 @@ class Database{
     private $con;
     private $dbhost="localhost";
     private $dbuser="root";
-    private $dbpass="";
+    private $dbpass="toor2019gc";
     private $dbname="factura";
     function __construct(){
         $this->connect_db();
