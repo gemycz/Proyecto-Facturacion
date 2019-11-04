@@ -50,6 +50,7 @@
         </div>
         <!--FORMULARIO REGISTRO-->
         <div class="registro-factura">
+        
             <h5>Datos Factura</h5>
             <div class="formulario-registro-factura">
             <p style="position: relative; top: 10px; left:-390px; font-size:17px;">Cliente</p>
@@ -58,7 +59,7 @@
                <input type="text" name="nombre" placeholder="Nombre... ">
                 </div>
                 <div class="casilla1-2">
-               <input type="text" name="cedula" placeholder="Cédula... ">
+               <input type="text" name="email" placeholder="CÃ©dula... ">
                </div>
                <div class="casilla1-3">
                <input type="date" name="fecha" placeholder="Fecha... ">
@@ -68,10 +69,10 @@
                 
             <div class="casilla2">
                 <div class="casilla2-1">
-               <input type="text" name="telefono" placeholder="Teléfono... ">
+               <input type="text" name="telefono" placeholder="TelÃ©fono... ">
                 </div>
                <div class="casilla2-2">
-               <input type="text" name="direccion" placeholder="Dirección... ">
+               <input type="text" name="direccion" placeholder="DirecciÃ³n... ">
                </div>
                <div class="casilla2-3">
                     <button>Buscar</button>
@@ -81,7 +82,7 @@
             <p style="position: relative; top: 10px; left:-390px; font-size:17px;">Producto</p>
             <div class="casilla4">
                 <div class="casilla4-1">
-               <input type="text" name="codigo" placeholder="Código... ">
+               <input type="text" name="codigo" placeholder="CÃ³digo... ">
                 </div>
                 <div class="casilla4-2">
                    <input type="number" name="cantidad" placeholder="Cantidad... ">
@@ -169,7 +170,7 @@
                 </div>
                 <div id="UFAESPE">
                     <h4 style="text-align: center">UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE</h4>
-                    <h5 style="text-align: center ; margin: 2px;">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN</h5>
+                    <h5 style="text-align: center ; margin: 2px;">INGENIERÃ�A EN TECNOLOGÃ�AS DE LA INFORMACIÃ“N</h5>
                     <h5 style="text-align: center; margin: 0px;">DESARROLLO WEB</h5>
                 </div>
             </div>

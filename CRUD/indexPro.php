@@ -15,8 +15,6 @@
 
 </head>
 <body><br><br>
-	<center><img src="MiFamiliaProtegida.png" width="500"></center>
-
 	
 
     <div class="container">

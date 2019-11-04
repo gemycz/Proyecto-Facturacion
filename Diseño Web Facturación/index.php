@@ -43,12 +43,13 @@
               -->
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
                <li><a class="icon-doc-text-inv" href="../CRUD/index.php">Lista de clientes</a></li>
-               <li><a class="icon-doc-text-inv" href="index.php">Lista de Productos</a></li>
+               <li><a class="icon-doc-text-inv" href="../CRUD/indexPro.php">Lista de Productos</a></li>
             </ul>
         </nav>
         <!--CONTENIDO-->
         <div id="contenido" style="background: url(img/backgroundblue.png)">
         </div>
+       
         <!--PIE DE PAGINA-->
         <footer>
             <div class="footer1">

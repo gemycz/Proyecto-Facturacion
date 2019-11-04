@@ -47,35 +47,72 @@
         <div id="contenido" style="background: url(img/backgroundblue.png)">
         <div class="title-contenido">
         <h2>Registrar Cliente</h2>
-        </div>
+        </div><br><br>
         <!--FORMULARIO REGISTRO-->
         <div class="registro-cliente">
             <h5>Datos Cliente</h5>
             <div class="formulario-registro-cliente">
               
-               <form action="#">
+               <form action="#" method="post">
                
                 <p>Nombre: </p><br>
-                <input type="text" name="nombre_cli">
+                <input type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
                 <br>
-                <p>Cédula: </p><br>
-                <input type="text" name="cedula_cli">
+                <p>DirecciÃ³n: </p><br>
+					<input type="text" name="direccion" id="direccion" class='form-control' maxlength="100" required >
                 <br>
-                <p>Teléfono: </p><br>
-                <input type="text" name="telefono_cli">
+                <p>TelÃ©fono: </p><br>
+					<input type="tel" size="10" pattern="[0-9]{10}" placeholder="Ej.: 0999999999" name="telefono" id="telefono" class='form-control' maxlength="100" required >
                 <br>
-                <p>Dirección: </p><br>
-                <input type="text" name="direccion_cli">
-                <br>
+                <p>CÃ©dula: </p><br>
+					<input type="text" name="cedula" size="10" id="cedula" pattern="[0-9]{10}" class='form-control' maxlength="100" required>
+					<div id="mensaje"></div>
+					 <script src="../CRUD/js/validar_cedula.js" type="text/javascript">
+                      
+                	 </script>                <br>
                 <p>Email: </p><br>
-                <input type="text" name="email_cli">
+					<input type="email" placeholder="Ej.: usuario@servidor.com" name="email" id="email" class='form-control' maxlength="100" required>
                 <br>
-                <input id="enviar" type="submit">
+					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Guardar datos</button>
                 
                </form>
             </div>     
         </div>
         </div>
+        
+        
+        
+        <?php
+            
+				include ("../CRUD/database.php");
+				$clientes= new Database();
+				if(isset($_POST) && !empty($_POST)){
+					$nombre = $clientes->sanitize($_POST['nombre']);
+					$direccion = $clientes->sanitize($_POST['direccion']);
+					$telefono = $clientes->sanitize($_POST['telefono']);
+					$cedula = $clientes->sanitize($_POST['cedula']);
+					$email = $clientes->sanitize($_POST['email']);
+					
+					
+					$res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email);
+					if($res){
+						$message= "Datos insertados con Ã©xito";
+						$class="alert alert-success";
+					}else{
+						$message="No se pudieron insertar los datos";
+						$class="alert alert-danger";
+					}
+					
+					?>
+				<div class="<?php echo $class?>">
+				  <?php echo $message;?>
+				</div>	
+					<?php
+				}
+	
+			?>
+    
+        
         <!--PIE DE PAGINA-->
         <footer>
             <div class="footer1">
@@ -114,7 +151,7 @@
                 </div>
                 <div id="UFAESPE">
                     <h4 style="text-align: center">UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE</h4>
-                    <h5 style="text-align: center ; margin: 2px;">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN</h5>
+                    <h5 style="text-align: center ; margin: 2px;">INGENIERÃ�A EN TECNOLOGÃ�AS DE LA INFORMACIÃ“N</h5>
                     <h5 style="text-align: center; margin: 0px;">DESARROLLO WEB</h5>
                 </div>
             </div>

@@ -22,7 +22,7 @@
 
 </head>
 <body><br><br>
-	<center><img src="MiFamiliaProtegida.png" width="500"></center>
+	
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -39,18 +39,15 @@
 				$clientes= new Database();
 				
 				if(isset($_POST) && !empty($_POST)){
-					$usuario = $clientes->sanitize($_POST['usuario']);
-					$contra = $clientes->sanitize($_POST['contra']);
-					$nombres = $clientes->sanitize($_POST['nombres']);
-					$apellidos = $clientes->sanitize($_POST['apellidos']);
-					$genero = $clientes->sanitize($_POST['genero']);
-					$direccion = $clientes->sanitize($_POST['direccion']);
-					$telefono = $clientes->sanitize($_POST['telefono']);
-					$correo_electronico = $clientes->sanitize($_POST['correo_electronico']);
-
+				    $nombre = $clientes->sanitize($_POST['nombre']);
+				    $direccion = $clientes->sanitize($_POST['direccion']);
+				    $telefono = $clientes->sanitize($_POST['telefono']);
+				    $cedula = $clientes->sanitize($_POST['cedula']);
+				    $email = $clientes->sanitize($_POST['email']);
+				    
 
 					$id=intval($_POST['id']);
-					$res = $clientes->update($usuario,$contra,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id);
+					$res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email,$id);
 					if($res){
 						$message= "Datos actualizados con √©xito";
 						$class="alert alert-success";
@@ -68,47 +65,40 @@
 				}
 				$datos_cliente=$clientes->single_record($id);
 			?>
-			<div class="row">
-				<form method="post">
+			<div class="row" >
 				
+				<form method="post">
 				<div class="col-md-6">
 					<label>Nombres:</label>
-					<input type="text" name="usuario" id="usuario" class='form-control' maxlength="100" required  value="<?php echo $datos_cliente->nom;?>">
-					<input type="hidden" name="id" id="id" class='form-control' maxlength="100"   value="<?php echo $datos_cliente->rowid;?>">
+					<input type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Alias:</label>
-					<input type="text" name="contra" id="contra" class='form-control' maxlength="100" required value="<?php echo $datos_cliente->name_alias;?>">
+					<label>DirecciÛn:</label>
+					<input type="text" name="direccion" id="direccion" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Facebook:</label>
-					<input type="text" name="nombres" id="nombres" class='form-control' maxlength="100" required value="<?php echo $datos_cliente->facebook;?>">
+					<label>TelÈfono:</label>
+					<input type="tel" size="10" pattern="[0-9]{10}" placeholder="Ej.: 0999999999" name="telefono" id="telefono" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-md-6">
-					<label>Whatsapp:</label>
-					<input type="text" name="apellidos" id="apellidos" class='form-control' maxlength="100" required value="<?php echo $datos_cliente->whatsapp;?>">
-				</div>
-				<div class="col-md-6">
-					<label>Zip:</label>
-					<input type="text" name="genero" id="genero" class='form-control' maxlength="100" required value="<?php echo $datos_cliente->zip;?>">
-				</div>
-				<div class="col-md-12">
-					<label>Direcci√≥n:</label>
-					<textarea  name="direccion" id="direccion" class='form-control' maxlength="255" required><?php echo $datos_cliente->address;?></textarea>
-				</div>
-				<div class="col-md-6">
-					<label>Tel√©fono:</label>
-					<input type="text" name="telefono" id="telefono" class='form-control' maxlength="15" required value="<?php echo $datos_cliente->phone;?>">
-				</div>
-				<div class="col-md-6">
-					<label>Correo electr√≥nico:</label>
-					<input type="email" name="correo_electronico" id="correo_electronico" class='form-control' maxlength="64" required value="<?php echo $datos_cliente->email;?>">
 				
+					<label>CÈdula:</label>
+					<input type="text" name="cedula" size="10" id="cedula" pattern="[0-9]{10}" class='form-control' maxlength="100" required>
+					<div id="mensaje"></div>
+					 <script src="js/validar_cedula.js" type="text/javascript">
+                      
+                	 </script>
+					
+					
 				</div>
-				
+				<div class="col-md-6">
+					<label>Email:</label>
+					<input type="email" placeholder="Ej.: usuario@servidor.com" name="email" id="email" class='form-control' maxlength="100" required>
+				</div>
+			
 				<div class="col-md-12 pull-right">
 				<hr>
-					<button type="submit" class="btn btn-success">Actualizar datos</button>
+					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Guardar datos</button>
 				</div>
 				</form>
 			</div>

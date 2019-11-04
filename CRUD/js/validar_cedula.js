@@ -26,12 +26,12 @@ document.getElementById('cedula').addEventListener('input', function() {
           total = total % 10 ? 10 - total % 10 : 0;
 
           if (cad.charAt(longitud-1) == total) {
-        	  document.getElementById("mensaje").innerHTML = ("Cedula Correcta");
+        	  document.getElementById("mensaje").innerHTML = (` <strong> <p style="color:green "> Cédula Correcta</p><strong>`);
         	  boton.disabled = false;
             
           }else{
             
-            document.getElementById("mensaje").innerHTML = ("Cedula Inválida");
+            document.getElementById("mensaje").innerHTML = (` <strong> <p style="color:red "> Cédula Inválida</p><strong>`);
             boton.disabled = true;
           }
         }
