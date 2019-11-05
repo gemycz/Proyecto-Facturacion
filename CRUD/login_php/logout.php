@@ -12,6 +12,6 @@ session_start();
 unset ($SESSION['username']);
 session_destroy();
 
-header('Location: http://localhost/login_php/login.php');
+header('Location: http://localhost/Proyeto-Facturacion/CRUD/login_php/login.php');
 
 ?>

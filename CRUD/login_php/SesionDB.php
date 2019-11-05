@@ -7,7 +7,7 @@ session_start();
 $servername = "localhost";
 $username = "gemycz";
 $password = "Gemy2019CZ";
-$dbname = "facturacion";
+$dbname = "factura";
 //CONEXION CON mysqli
 
 // Crear conexion
@@ -44,7 +44,7 @@ if($pass==$row['contraseña']){
     if($_SESSION['username']==false){
         header("location:login.php");
     }else{
-        header('Location: http://localhost/login_php/panel-control.php');
+        header('Location: http://localhost/Proyeto-Facturacion/CRUD/index.php');
 
     }
     

@@ -4,7 +4,7 @@
  Web: obedalvarado.pw
  Mail: info@obedalvarado.pw
  ---------------------------*/
-class Database{
+class Database1{
     private $con;
     private $dbhost="localhost";
     private $dbuser="root";
@@ -44,6 +44,11 @@ class Database{
         return $res;
     }
     
+    public function buscarPro($codigo){
+        $sql = "SELECT id_pro, nombre_pro, codigo_pro, cantidad_pro, precio_pro FROM producto where codigo_pro ='$codigo'";
+        $res = mysqli_query($this->con, $sql);
+        return $res;
+    }
     
     public function single_record($id){
         $sql = "SELECT id_pro, nombre_pro, codigo_pro, cantidad_pro, precio_pro FROM producto where id_pro ='$id";

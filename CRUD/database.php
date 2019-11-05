@@ -51,6 +51,12 @@
 		    return $res;
 		}
 		
+		public function buscarPro($codigo){
+		    $sql = "SELECT id_pro, nombre_pro, codigo_pro, cantidad_pro, precio_pro FROM producto where codigo_pro ='$codigo'";
+		    $res = mysqli_query($this->con, $sql);
+		    return $res;
+		}
+		
 		public function single_record($id){
 			$sql = "SELECT id_cli, nombre_cli, direccion_cli, telefono_cli, cedula_cli, email_cli FROM cliente where id_cli ='$id'";
 			$res = mysqli_query($this->con, $sql);

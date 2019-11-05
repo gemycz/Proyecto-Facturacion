@@ -35,8 +35,8 @@
               <!--<li><a href="#">Cliente</a></li>-->
               <li class="icon-user-add">Registro <i class="fas fa-angle-down"></i> 
                 <ul>
-                  <li><a class="icon-user" href="cliente.php">Cliente</a></li>
-                  <li><a class="icon-shopping-bag" href="producto.php">Producto</a></li>
+                  <li><a class="icon-user" href="create.php">Cliente</a></li>
+                  <li><a class="icon-shopping-bag" href="createPro.php">Producto</a></li>
                   <!--
                   <li><a href="#">texto</a></li>
                   <li><a href="#">texto</a></li>
@@ -56,8 +56,8 @@
               </li>
               -->
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
-               <li><a class="icon-doc-text-inv" href="../CRUD/index.php">Lista de clientes</a></li>
-               <li><a class="icon-doc-text-inv" href="../CRUD/indexPro.php">Lista de Productos</a></li>
+               <li><a class="icon-doc-text-inv" href="listaCliente.php">Lista de clientes</a></li>
+               <li><a class="icon-doc-text-inv" href="indexPro.php">Lista de Productos</a></li>
             </ul>
         </nav>
         
@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="col-sm-8"><h2>Información de  <b>Factura</b></h2></div>
                     <div class="col-sm-4">
-                        <a href="index.php" class="btn btn-info add-new"><i class="fa fa-arrow-left"></i> Regresar</a>
+                        <a href="create.php" class="btn btn-info add-new"><i class="fa fa-arrow-left"></i> Registrar Cliente</a>
                     </div>
                 </div>
             </div>
@@ -140,11 +140,24 @@
 				
 					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Guardar datos</button>
 				</div>
-				
+				<?php
+					}
+				?>
+            </form>
+            
 			</div>
+			
+			
+			 <!--Busqueda de producto-->
+			
+			 
 			<hr>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Producto</p>
+          <form method="post">
+          
+           
            <div class="row">
+           
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Codigo:</label>
 					<input  type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
@@ -157,9 +170,12 @@
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 				
 					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Ingresar</button>
+				
+					
 				</div>
 			</div>
-				</form>
+			
+			
             <br>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
             
@@ -173,10 +189,11 @@
                     <th>Valor Total</th>
                 </tr>
                 <tr>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
+                        <td>......</td>
+                        <td></td>
+                                          
+						<td></td>
+						 <td>......</td>
 
                 </tr>
                 <tr>
@@ -204,16 +221,15 @@
             </div>
             <!--TOTALES-->
             FALTA LOS TOTALES
-            </form>
-            </div>     
+              
+           </form>
+            </div>  
+            
         </div>
         </div>
                    
                    
-				<?php
-					}
-				?>
-                    
+				
                     
                           
                
@@ -223,6 +239,9 @@
     </div>
  </div>
   </div>
+  
+  
+  
 <!--PIE DE PAGINA-->
         <footer>
             <div class="footer1">

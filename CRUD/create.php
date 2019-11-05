@@ -37,8 +37,8 @@
               <!--<li><a href="#">Cliente</a></li>-->
               <li class="icon-user-add">Registro <i class="fas fa-angle-down"></i> 
                 <ul>
-                  <li><a class="icon-user" href="cliente.php">Cliente</a></li>
-                  <li><a class="icon-shopping-bag" href="producto.php">Producto</a></li>
+                  <li><a class="icon-user" href="create.php">Cliente</a></li>
+                  <li><a class="icon-shopping-bag" href="createPro.php">Producto</a></li>
                   <!--
                   <li><a href="#">texto</a></li>
                   <li><a href="#">texto</a></li>
@@ -58,8 +58,8 @@
               </li>
               -->
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
-               <li><a class="icon-doc-text-inv" href="../CRUD/index.php">Lista de clientes</a></li>
-               <li><a class="icon-doc-text-inv" href="../CRUD/indexPro.php">Lista de Productos</a></li>
+               <li><a class="icon-doc-text-inv" href="ListaCliente.php">Lista de clientes</a></li>
+               <li><a class="icon-doc-text-inv" href="indexPro.php">Lista de Productos</a></li>
             </ul>
         </nav>
   
@@ -152,7 +152,7 @@
 			</div>
         </div></div>
     </div> 
-   </div>
+   
     
      <!--PIE DE PAGINA-->
         <footer>

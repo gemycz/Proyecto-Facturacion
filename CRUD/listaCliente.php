@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRUD con PHP usando Programación Orientada a Objetos</title>
+<title>Lista de Clientes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,12 +18,11 @@
         <script type="text/javascript" src="js/componentes.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Poppins:300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
- 
 
 </head>
 <body><br><br>
 	
-	<!--CABECERA-->
+	 <!--CABECERA-->
     <header id="cabecera" style="background: url(img/banner.png)">
         <img src="img/logo.png" width="600">
     </header>
@@ -56,85 +55,89 @@
               </li>
               -->
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
-               <li><a class="icon-doc-text-inv" href="ListaCliente.php">Lista de clientes</a></li>
+               <li><a class="icon-doc-text-inv" href="listaCliente.php">Lista de clientes</a></li>
                <li><a class="icon-doc-text-inv" href="indexPro.php">Lista de Productos</a></li>
             </ul>
         </nav>
-  
-  <div id="contenido" style="background: url(img/backgroundblue.png)">
-        <div class="title-contenido">
-        <h2>Registrar Producto</h2>
-        </div>
-	
 
+ <div id="contenido" style="background: url(img/backgroundblue.png)">
+   
     <div class="container">
-        <div class="registro-cliente">
+<br><br>
+    	 <center> <form class="form-inline my-2 my-lg-0" method="POST" action="busqueda.php">
+    	  	Ingrese el usuario:
+      <input class="form-control mr-sm-2" type="search" name="buscar" id="buscar" placeholder="Search" aria-label="Search">
+      <button id="buscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form></center>
+      
+        <div class="table-wrapper " style="width: 100%;">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2>Agregar<b>Producto</b></h2></div>
+                    <div class="col-sm-8"><h2>Listado de  <b>Clientes</b></h2></div>
                     <div class="col-sm-4">
-                        <a href="index.php" class="btn btn-info add-new"><i class="fa fa-arrow-left"></i> Regresar</a>
+                        <a href="create.php" class="btn btn-primary add-new"><i class="fa fa-plus"></i> Agregar cliente</a>
                     </div>
+
                 </div>
             </div>
-            <?php
-            //$usuario,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id
-				include ("database.php");
-				$producto= new Database();
-				if(isset($_POST) && !empty($_POST)){
-				    $nomPro = $producto->sanitize($_POST['nomPro']);
-					$codigo = $producto->sanitize($_POST['codigo']);
-					$cantidad = $producto->sanitize($_POST['cantidad']);
-					$precio = $producto->sanitize($_POST['precio']);
-							
+            <table class="table table-bordered " >
+                <thead>
+                    <?php
+                    //$usuario,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id
+                    ?>
+
+                    <tr>
+                        <th style="width: 3%;">Id</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                         <th style="width: 9%;">Teléfono</th>
+                        <th>Cédula</th>
+                        <th >E-mail</th>
+                        <th>Acciones</th>
+                        
+                    </tr>
+                </thead>
+				<?php 
+				include ('database.php');
+				$clientes = new Database();
+				$listado=$clientes->read();
+				?>
+                <tbody>
+				<?php 
+					while ($row=mysqli_fetch_object($listado)){
+					    $rowid=$row->id_cli;
+					    $nombre=$row->nombre_cli;
+					    $direccion=$row->direccion_cli;
+					    $telefono=$row->telefono_cli;
+					    $cedula=$row->cedula_cli;
+					    $email=$row->email_cli;
+				?>
+					<tr>
+                        <th><?php echo $rowid;?></th>
+                        <td><?php echo $nombre;?></td>
+                        <td><?php echo $direccion;?></td>
+                        <td><?php echo $telefono;?></td>
+                        <td><?php echo $cedula;?></td>
+                        <td><?php echo $email;?></td>
 					
-					$res = $producto->createPro($nomPro,$codigo,$cantidad,$precio);
-					if($res){
-						$message= "Datos insertados con éxito";
-						$class="alert alert-success";
-					}else{
-						$message="No se pudieron insertar los datos";
-						$class="alert alert-danger";
+                        <td>
+						    <a href="update.php?id=<?php echo $rowid;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="delete.php?id=<?php echo $rowid;?>" class="delete" title="Eliminar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>	
+				<?php
 					}
-					
-					?>
-				<div class="<?php echo $class?>">
-				  <?php echo $message;?>
-				</div>	
-					<?php
-				}
-	
-			?>
-			<div class="row">
-				<form method="post">
-				<div class="col-md-6">
-					<label>Nombres Producto:</label>
-					<input type="text" name="nomPro" id="nomPro" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-md-6">
-					<label>Codigo:</label>
-					<input type="text" name="codigo" id="codigo" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-md-6">
-					<label>Cantidad:</label>
-					<input type="text" name="cantidad" id="cantidad" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-md-6">
-					<label>Precio:</label>
-					<input type="text" name="precio" id="precio" class='form-control' maxlength="100" required>
-				</div>
-			
-				<div class="col-md-12 pull-right">
-				<hr>
-					<button type="submit" class="btn btn-success">Guardar Producto</button>
-				</div>
-				</form>
-			</div>
+				?>
+                    
+                    
+                          
+                </tbody>
+            </table>
         </div>
-    </div>  
-   </div>
+    </div>
+     </div>
      
-      <!--PIE DE PAGINA-->
+       <!--PIE DE PAGINA-->
         <footer>
             <div class="footer1">
                 <div id="Joshua">
@@ -181,7 +184,7 @@
                 <p>2019 &copy; FactuRappi. Todos los derechos reservados.</p>
             </div>
         </footer>
-    
      
+          
 </body>
-</html>     
+</html>                            

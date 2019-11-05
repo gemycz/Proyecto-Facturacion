@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRUD con PHP usando Programación Orientada a Objetos</title>
+<title>Factura</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
         <link rel="stylesheet" type="text/css" href="css/fontello.css">
         <script type="text/javascript" src="js/componentes.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Poppins:300&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 </head>
 <body><br><br>
 	
-	<!--CABECERA-->
+	 <!--CABECERA-->
     <header id="cabecera" style="background: url(img/banner.png)">
         <img src="img/logo.png" width="600">
     </header>
@@ -56,85 +56,139 @@
               </li>
               -->
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
-               <li><a class="icon-doc-text-inv" href="ListaCliente.php">Lista de clientes</a></li>
+               <li><a class="icon-doc-text-inv" href="listaCliente.php">Lista de clientes</a></li>
                <li><a class="icon-doc-text-inv" href="indexPro.php">Lista de Productos</a></li>
             </ul>
         </nav>
-  
-  <div id="contenido" style="background: url(img/backgroundblue.png)">
+        
+     <!--CONTENIDO-->
+        <div id="contenido-factura" style="background: url(img/backgroundblue.png); background-repeat: no-repeat;">
         <div class="title-contenido">
-        <h2>Registrar Producto</h2>
-        </div>
-	
-
+        <h2>Factura</h2>
+        </div>   
+       
     <div class="container">
-        <div class="registro-cliente">
+ <center> <form class="form-inline my-2 my-lg-0" method="POST" action="busqueda.php">
+    	  	Ingrese el numero de Cedula:
+      <input class="form-control mr-sm-2" type="search" name="buscar" id="buscar" placeholder="Search" aria-label="Search">
+      <button id="buscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form></center>
+        
+      <!--FORMULARIO REGISTRO-->
+        <div class="registro-factura">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2>Agregar<b>Producto</b></h2></div>
+                    <div class="col-sm-8"><h2>Información de  <b>Factura</b></h2></div>
                     <div class="col-sm-4">
-                        <a href="index.php" class="btn btn-info add-new"><i class="fa fa-arrow-left"></i> Regresar</a>
+                        <a href="create.php" class="btn btn-info add-new"><i class="fa fa-arrow-left"></i> Registrar Cliente</a>
                     </div>
                 </div>
             </div>
-            <?php
-            //$usuario,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id
-				include ("database.php");
-				$producto= new Database();
-				if(isset($_POST) && !empty($_POST)){
-				    $nomPro = $producto->sanitize($_POST['nomPro']);
-					$codigo = $producto->sanitize($_POST['codigo']);
-					$cantidad = $producto->sanitize($_POST['cantidad']);
-					$precio = $producto->sanitize($_POST['precio']);
-							
+            
+                      
+                
+				<?php 
+                $buscar=$_POST['buscar'];
+				include ('database.php');
+
+				$producto = new Database();
+				$listado=$producto->buscarPro($buscar);
+				?>
+                
+				<?php 
+					while ($row=mysqli_fetch_object($listado)){
+					    $rowid=$row->id_pro;
+					    $nombre=$row->nombre_pro;
+					    $codigo=$row->codigo_pro;
+					    $cantidad=$row->cantidad_pro;
+					    $precio=$row->precio_pro;
+					    
+				?>
 					
-					$res = $producto->createPro($nomPro,$codigo,$cantidad,$precio);
-					if($res){
-						$message= "Datos insertados con éxito";
-						$class="alert alert-success";
-					}else{
-						$message="No se pudieron insertar los datos";
-						$class="alert alert-danger";
-					}
-					
-					?>
-				<div class="<?php echo $class?>">
-				  <?php echo $message;?>
-				</div>	
-					<?php
-				}
-	
-			?>
-			<div class="row">
-				<form method="post">
-				<div class="col-md-6">
-					<label>Nombres Producto:</label>
-					<input type="text" name="nomPro" id="nomPro" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-md-6">
+
+            
+			<hr>
+            <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Producto</p>
+           <div class="row">
+           <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Codigo:</label>
-					<input type="text" name="codigo" id="codigo" class='form-control' maxlength="100" required >
+					<input  type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
 				</div>
-				<div class="col-md-6">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Cantidad:</label>
-					<input type="text" name="cantidad" id="cantidad" class='form-control' maxlength="100" required >
+					<input type="number" name="cantidad" placeholder="Cantidad... " class='form-control' maxlength="100" required >
 				</div>
-				<div class="col-md-6">
-					<label>Precio:</label>
-					<input type="text" name="precio" id="precio" class='form-control' maxlength="100" required>
+				
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+				
+					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Ingresar</button>
 				</div>
-			
-				<div class="col-md-12 pull-right">
-				<hr>
-					<button type="submit" class="btn btn-success">Guardar Producto</button>
-				</div>
-				</form>
 			</div>
+				</form>
+            <br>
+            <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
+            
+            <div class="detalles">
+               <table id="tablafactura">
+               
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Decripción</th>
+                    <th>Valor Unitario</th>
+                    <th>Valor Total</th>
+                </tr>
+                <tr>
+                   <td><?php echo $nombre;?></td>
+                        <td><?php echo $codigo;?></td>
+                        <td><?php echo $cantidad;?></td>
+						<td><?php echo $precio;?></td>
+
+                </tr>
+                <tr>
+                    <td>......</td>
+                    <td>......</td>
+                    <td>......</td>
+                    <td>......</td>
+
+                </tr>
+                <tr>
+                    <td>......</td>
+                    <td>......</td>
+                    <td>......</td>
+                    <td>......</td>
+
+                </tr>
+                <tr>
+                    <td>......</td>
+                    <td>......</td>
+                    <td>......</td>
+                    <td>......</td>
+
+                </tr>
+                </table>
+            </div>
+            <!--TOTALES-->
+            FALTA LOS TOTALES
+            </form>
+            </div>     
         </div>
-    </div>  
-   </div>
-     
-      <!--PIE DE PAGINA-->
+        </div>
+                   
+                   
+				<?php
+					}
+				?>
+                    
+                    
+                          
+               
+            </table>
+        </div>
+    </div>
+    </div>
+ </div>
+  </div>
+<!--PIE DE PAGINA-->
         <footer>
             <div class="footer1">
                 <div id="Joshua">
@@ -181,7 +235,6 @@
                 <p>2019 &copy; FactuRappi. Todos los derechos reservados.</p>
             </div>
         </footer>
-    
-     
+
 </body>
-</html>     
+</html>                            
