@@ -24,8 +24,46 @@ if($now > $_SESSION['expire']) {
 
 <?php 
   //empty si no existe
-include "conexion.php";
-?>
+
+ include ("database.php");
+ 
+
+  $factura= new Database();
+
+  if(isset($_POST) && !empty($_POST)){
+
+          $id_cli =$_POST['id_cliente'];
+          $subtotal_fac = 0;
+          $iva_fac = 0;
+          $total_fac = 0;
+          $fecha_fac= $_POST['fecha_fac'];
+          
+          
+          $res = $factura->crear_factura($id_cli, $subtotal_fac,  $iva_fac,  $total_fac, $fecha_fac);
+        
+
+
+              if($res){
+                  $message= "Datos insertados con Exito";
+                  $class="alert alert-success";
+
+              }else{
+                  $message="No se pudieron insertar los datos";
+                  $class="alert alert-danger";
+              }
+          
+        
+          ?>
+        <div class="<?php echo $class?>">
+          <?php echo $message;?>
+        </div>  
+          <?php
+          header("location:detalle.php");
+        }
+  
+      ?>
+
+        
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,11 +139,8 @@ include "conexion.php";
         </div>   
        
     <div class="container">
- <center> <form class="form-inline my-2 my-lg-0" method="POST" action="busqueda.php">
-    	  	Ingrese el numero de Cedula:
-      <input class="form-control mr-sm-2" type="search" name="buscar" id="buscar" placeholder="Search" aria-label="Search">
-      <button  class="btn btn-success" type="submit">Buscar</button>
-    </form></center>
+ <center> 
+
         
       <!--FORMULARIO REGISTRO-->
         <div class="registro-factura">
@@ -156,26 +191,43 @@ include "conexion.php";
     });
 
 </script>
+   <script type="text/javascript">
+    $(function() {
+            $("#id_factura").autocomplete({
+                source: "cargar_factura.php",
+                minLength: 1,
+                select: function(event, ui) {
+          event.preventDefault();
+          $('#id_factura').val(ui.item.id);
+        
+          
+           }
+            });
+    });
 
-            		
+</script>
+
+            		 
+          Ingrese el numero de Cedula:
+      <input class="form-control mr-sm-2" type="search" name="cedula" id="cedula" placeholder="Search" aria-label="Search">
+     
+   
 
             <div class="formulario-registro-factura">
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Cliente</p>
             <div class="row" >
+
 				
 				<form method="post">
           <div class="col-md-6">
-          <label>Id Cliente:</label>
+        <label>Id Cliente:</label>
           <input type="text" name="id_cliente" id="id_cliente" placeholder="Id... " class='form-control' maxlength="100" required >
         </div>
 				<div class="col-md-6">
 					<label>Nombres:</label>
 					<input type="text" name="nombre" id="nombre" placeholder="Nombre... " class='form-control' maxlength="100" required >
 				</div>
-        <div class="col-md-6">
-          <label>Cedula:</label>
-          <input type="text" name="cedula" id="cedula" placeholder="Cedula... " class='form-control' maxlength="100" required >
-        </div>
+       
 				<div class="col-md-6">
 					<label>Dirección:</label>
 					<input  type="text" name="direccion" id="direccion" placeholder="Dirección... " class='form-control' maxlength="100" required >
@@ -193,103 +245,103 @@ include "conexion.php";
 				<div class="col-md-6">
 					<label>Fecha:</label>
 					
-					<input class='form-control' type="date" name="fecha" placeholder="Fecha... ">
+					<input class='form-control' type="text" name="fecha_fac" placeholder="Fecha... " value="<?php echo date("Y-m-d");?>">
 					
 				</div>
 			
 				
 				
 			</div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+        
+          <button type="submit" id="boton_factura" class="btn btn-success"  >Crear Factura</button>
+        </div>
 
-			<hr>
-			 
-             <?php 
-                 $query_pro = mysqli_query($conn,"SELECT id_pro, codigo_pro, cantidad_pro FROM producto");
-                 $result_pro = mysqli_num_rows($query_pro);
-            ?>
-             <select name="producto" id="producto"> 
-            <?php 
-            if($result_pro > 0){
-                   
-                 while($pro = mysqli_fetch_array($query_pro)){
-                     
+		
 
-                     
-                     ?>
-                    
-                     <option value="<?php echo $pro["id_pro"]; ?>"><?php echo $pro["codigo_pro"]; ?></option>
-                <?php 
-                   }
-                ?>
-                 
-                   <input type="text" name="cantidad" id="cantidad" value="<?php echo $pro["cantidad_pro"]; ?>">
-                <?php 
-                 }
-                 ?>
-            <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Producto</p>
-            Id: <input type="text" name="id_producto" id="id_producto" >
-              Stock: <input type="text" name="stock" id="stock" ><br>
-            Nombre: <input type="text" name="nombre_producto" id="nombre_producto" >
-             Precio: <input type="text" name="precio" id="precio" >
-           <div class="row">
-           <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-					<label>C�digo:</label>
-					<input  type="text" name="codigo_producto" id="codigo_producto" class='form-control' maxlength="100" required >
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-					<label>Cantidad:</label>
-					<input type="number" name="cantidad" placeholder="Cantidad... " class='form-control' maxlength="100" required >
-				</div>
-				
-				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-				
-					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Ingresar</button>
-				</div>
-			</div>
-				</form>
+    </form>
+  <hr>
 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+
+   
+
             <div class="row" style="background: white;">
-              <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
+              <p style="position: relative; top: 10px; left:-280px; font-size:17px;">FACTURAS</p>
 
                <div class="detalles">
-               <table id="tablafactura">
+               <table class="table table-bordered " id="dataTable">
+                <thead class="table-dark">
+                    <tr>
+                        
+                 
+                        <th>Id_factura</th>
+                        <th>Id_cliente</th>
+                 
+                        <th>Subtotal</th>
+                         <th>IVA</th>
+                        <th>Total</th>
+                         <th>Fecha</th>
+                        <th style="width: 10%;">Acciones</th>
+                    </tr>
+                </thead>
+                <?php 
+             
+ 
+                $tabla = new Database();
+                $listado=$tabla->read_factura();
+
+                ?>
+                <tbody>
+                <?php 
+
+
+                    while ($row=mysqli_fetch_object($listado)){
+                
+                      
+                        $id_fact=$row->ID_FAC;
+                        $id_cli=$row->ID_CLI;
+                        $subtotal_fac=$row->SUBTOTAL_FAC;
+                        $iva_fac=$row->IVA_FAC;
+                        $total_fac=$row->TOTAL_TAC;
+                        $fecha_fac=$row->fecha_fac;
+
+                     
+                        
+                ?>
+                    <tr>
+                       
+                      <td><?php echo $id_fact;?></td>
+                      <td><?php echo $id_cli;?></td>
+                      <td><?php echo $subtotal_fac;?></td>
+                    
+                        <td><?php echo $iva_fac;?></td>
+                        <td><?php echo $total_fac;?></td>
+                        <td><?php echo $fecha_fac;?></td>
+                    <td>
+
+                <a href="" class="delete" title="Eliminar" data-toggle="tooltip" style="color: #BD3B3B ;">
+                <i class="fas fa-fw fa-trash" ></i>Eliminar</a>
+
+              
+                        </td>
+                    </tr>   
+            
+              <?php
+                    }
+
+     
+
+                ?>
+                    
+                          
+                </tbody>
+
                
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Decripción</th>
-                    <th>Valor Unitario</th>
-                    <th>Valor Total</th>
-                </tr>
-                <tr>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
+      
+      </table>
 
-                </tr>
-                <tr>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-
-                </tr>
-                <tr>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-
-                </tr>
-                <tr>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-                    <td>......</td>
-
-                </tr>
-                </table>
+   
             </div>
             </div>
             
@@ -301,11 +353,7 @@ include "conexion.php";
         </div>
         </div>
                    
-                   
-
-                          
-               
-            </table>
+    
         </div>
     </div>
     </div>

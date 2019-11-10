@@ -106,6 +106,7 @@
 		    $res = mysqli_query($this->con, $sql);
 		    return $res;
 		}
+
 		public function read2Pro($buscar){
 		    $sql = "SELECT id_pro, nombre_pro, codigo_pro, cantidad_pro, precio_pro FROM producto where codigo_pro ='$buscar'";
 		    $res = mysqli_query($this->con, $sql);
@@ -115,7 +116,11 @@
 		public function buscarPro($codigo){
 		    $sql = "SELECT id_pro, nombre_pro, codigo_pro, cantidad_pro, precio_pro FROM producto where codigo_pro ='$codigo'";
 		    $res = mysqli_query($this->con, $sql);
-		    return $res;
+		    if(mysqli_num_rows($res)>0){
+		        return 1;
+		    } else {
+		        return 0;
+		    }
 		}
 		
 		public function single_recordPro($id){
@@ -124,7 +129,12 @@
 		    $return = mysqli_fetch_object($res );
 		    return $return ;
 		}
-		
+		public function single_recordPro2($id){
+		    $sql = "SELECT `ID_PRO`, `NOMBRE_PRO`, `CODIGO_PRO`, `CANTIDAD_PRO`, `PRECIO_PRO` FROM producto where ID_PRO ='$id";
+		    $res = mysqli_query($this->con, $sql);
+		    $return = mysqli_fetch_object($res );
+		    return $return ;
+		}
 		public function updatePro($nomPro,$codigo,$cantidad,$precio,$id){
 		    $sql = "UPDATE producto SET nombre_pro ='$nomPro', codigo_pro ='$codigo', cantidad_pro ='$cantidad',precio_pro ='$precio' WHERE id_pro = $id";
 		    $res = mysqli_query($this->con, $sql);
@@ -162,20 +172,20 @@
 	    }
 	}
 	
-	public function read_detaill(){
+	public function read_detail(){
 	    $sql = "SELECT  id_fac,id_pro,id_detfact, cant_detfact, valortotal_detfact, precio_detfact FROM detalle_factura";
 	    $res = mysqli_query($this->con, $sql);
 	    return $res;
 	}
 	
 	public function read_factura(){
-	    $sql = "SELECT id_fac,id_cli, subtotal_fac, iva_fac, total_fac, fecha_fac FROM factura";
+	    $sql = "SELECT `ID_FAC`, `ID_CLI`, `SUBTOTAL_FAC`, `IVA_FAC`, `TOTAL_TAC`, `fecha_fac` FROM factura";
 	    $res = mysqli_query($this->con, $sql);
 	    return $res;
 	}
 	
-	public function create_detail($id_fac, $id_pro, $id_detfact, $cantidad_detfact, $valortotal_detfac, $precio_detfact){
-	    $sql = "INSERT INTO `detalle_factura`( `ID_FAC`, `ID_PRO`,'ID_DETFACT',`CANT_DETFACT`, `VALORTOTAL_DETFACT`,'PRECIO_DETFACT ' )  VALUES ('$id_fact','$id_pro','$precio_detfact','$cantidad_detfac','$valortotal_detfac',' $precio_detfact');";
+	public function create_detail( $id_pro, $id_fact, $cantidad_detfact, $valortotal_detfac, $precio_detfact){
+	    $sql = "INSERT INTO `detalle_factura`( `ID_PRO`, `ID_FAC`, `CANT_DETFACT`, `VALORTOTAL_DETFACT`, `PRECIO_DETFACT`)  VALUES ('$id_pro','$id_fact','$cantidad_detfact','$valortotal_detfac','$precio_detfact');";
 	    $res = mysqli_query($this->con, $sql);
 	    if($res){
 	        return true;
@@ -190,14 +200,14 @@
 	    return $res;
 	}
 	
-	public function read_detail($id_fac){
-	    $sql = "SELECT id_fac,id_pro,id_detfact, cant_detfact, valortotal_detfact,PRECIO_DETFACT   FROM detalle_factura WHERE ID_FAC=$id_fac";
+	public function read_detalle($id_fac){
+	    $sql = "SELECT `ID_DETFACT`, `ID_PRO`, `ID_FAC`, `CANT_DETFACT`, `VALORTOTAL_DETFACT`, `PRECIO_DETFACT`  FROM detalle_factura WHERE ID_FAC=$id_fac";
 	    $res = mysqli_query($this->con, $sql);
 	    return $res;
 	}
 	
-	public function create_fact($id_cli,$subtotal_fac,	$iva_fac,	$total_fac,	$fecha_fac){
-	    $sql = "INSERT INTO `factura`(`ID_CLI`, `SUBTOTAL_FAC`, `IVA_FAC`, `TOTAL_FAC`, `FECHA_FAC`) VALUES ('$id_cli','$subtotal_fac','$iva_fac','$total_fac','$fecha_fac');";
+	public function crear_factura($id_cli,$subtotal_fac,	$iva_fac,	$total_fac,	$fecha_fac){
+	    $sql = "INSERT INTO `factura` (`ID_CLI`, `SUBTOTAL_FAC`, `IVA_FAC`, `TOTAL_TAC`, `fecha_fac`) VALUES ('$id_cli','$subtotal_fac','$iva_fac','$total_fac','$fecha_fac');";
 	    $res = mysqli_query($this->con, $sql);
 	    if($res){
 	        return true;
@@ -214,6 +224,16 @@
 	    $res = mysqli_query($this->con, $sql);
 	    return $res;
 	}
+
+		public function actualizar_factura($id_fact,$subtotal_fac,$iva_fac, $total_fac){
+			$sql= "UPDATE `factura` SET `SUBTOTAL_FAC`='$subtotal_fac',`IVA_FAC`='$iva_fac',`TOTAL_TAC`='$total_fac' WHERE ID_FAC=$id_fact";
+			$res = mysqli_query($this->con, $sql);
+			if($res){
+				return true;
+			}else{
+				return false;
+			}
+		}
 	
 	
 	

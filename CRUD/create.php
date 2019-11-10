@@ -122,7 +122,7 @@ if($now > $_SESSION['expire']) {
 				
 					//consulta de la variable quuery
 					
-					if($clientes->validar($cedula)){
+					if($clientes->validar($cedula)==1){
 					    $message="El usuario ya existe.";
 					    $class="alert alert-danger";
 					   

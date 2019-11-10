@@ -75,5 +75,17 @@ class Database1{
             return false;
         }
     }
+    
+    public function validarPro($codigo){
+        $sql = "SELECT id_pro, nombre_pro, codigo_pro, cantidad_pro, precio_pro FROM producto where codigo_pro ='$codigo";
+        $res = mysqli_query($this->con, $sql);
+        
+        if(mysqli_num_rows($res)>0){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    
 }
 ?>
