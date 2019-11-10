@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +69,7 @@
         </div>   
        
     <div class="container">
- <center> <form class="form-inline my-2 my-lg-0" method="POST" action="busqueda.php">
+ <center> <form class="form-inline my-2 my-lg-0" method="POST" action="busquedaPro.php">
     	  	Ingrese el numero de Cedula:
       <input class="form-control mr-sm-2" type="search" name="buscar" id="buscar" placeholder="Search" aria-label="Search">
       <button id="buscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
@@ -89,10 +90,12 @@
                 
 				<?php 
                 $buscar=$_POST['buscar'];
+               
 				include ('database.php');
 
 				$clientes = new Database();
 				$listado=$clientes->buscar_cedula($buscar);
+				
 				?>
                 
 				<?php 
@@ -136,10 +139,7 @@
 					
 				</div>
 			
-				<div class="col-md-6"t">
 				
-					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Guardar datos</button>
-				</div>
 				<?php
 					}
 				?>
@@ -153,15 +153,17 @@
 			 
 			<hr>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Producto</p>
-          <form method="post">
-          
-           
+          <form method="post" >
+         
            <div class="row">
-           
+           <form class="form-inline my-2 my-lg-0" method="POST" action="busquedaPro.php">
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Codigo:</label>
-					<input  type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
-				</div>
+	
+    			  <input class="form-control mr-sm-2"  name="buscarPro" id="buscarPro" >
+   		
+		</div>
+		
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Cantidad:</label>
 					<input type="number" name="cantidad" placeholder="Cantidad... " class='form-control' maxlength="100" required >
@@ -169,16 +171,36 @@
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 				
-					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Ingresar</button>
-				
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 					
 				</div>
+				</form>
 			</div>
 			
 			
             <br>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
             
+            <?php 
+                
+                $buscarPro=$_POST['buscarPro'];
+				include ('databasePro.php');
+
+				$producto = new Database1();
+				
+				$listadoPro=$producto->buscarPro($buscarPro);
+				?>
+            
+            <?php 
+					while ($row=mysqli_fetch_object($listadoPro)){
+					    $rowid=$row->id_pro;
+						$nombre=$row->nombre_pro;
+						$codigo=$row->codigo_pro;
+						$cantidad=$row->cantidad_pro;
+						$precio=$row->precio_pro;
+
+                        
+				?>
             <div class="detalles">
                <table id="tablafactura">
                
@@ -187,6 +209,15 @@
                     <th>Decripción</th>
                     <th>Valor Unitario</th>
                     <th>Valor Total</th>
+                </tr>
+                <tr>
+                
+                
+                    <th><?php echo $rowid;?></th>
+                        <td><?php echo $nombre;?></td>
+                        <td><?php echo $codigo;?></td>
+                        <td><?php echo $cantidad;?></td>
+						<td><?php echo $precio;?></td>
                 </tr>
                 <tr>
                         <td>......</td>
@@ -218,6 +249,9 @@
 
                 </tr>
                 </table>
+                 <?php
+					}
+				?>
             </div>
             <!--TOTALES-->
             FALTA LOS TOTALES

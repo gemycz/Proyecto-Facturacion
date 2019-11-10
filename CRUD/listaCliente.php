@@ -121,8 +121,8 @@
                         <td><?php echo $email;?></td>
 					
                         <td>
-						    <a href="update.php?id=<?php echo $rowid;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="delete.php?id=<?php echo $rowid;?>" class="delete" title="Eliminar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+						    <a href="update.php?id=<?php echo $rowid;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons" style="color:#20B38D">&#xE254;</i></a>
+                            <a href="delete.php?id=<?php echo $rowid;?>"title="Eliminar" data-toggle="tooltip"><i class="material-icons" style="color:#B33420">delete_forever</i></a>
                         </td>
                     </tr>	
 				<?php

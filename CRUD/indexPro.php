@@ -90,14 +90,15 @@
                         <th>Descripcion</th>
                         <th>Precio</th>
                         <th>Precio Total</th>
+                        <th>Acciones</th>
                         </center>
                     </tr>
                 </thead>
                 
 				<?php 
-				include ('database.php');
-				$producto = new Database();
-				$listado=$producto->readPro();
+				include ('databasePro.php');
+				$producto = new Database1();
+				$listado=$producto->read();
 				?>
                 <tbody>
 				<?php 
@@ -116,6 +117,11 @@
                         <td><?php echo $codigo;?></td>
                         <td><?php echo $cantidad;?></td>
 						<td><?php echo $precio;?></td>
+						<th></th>
+						<td>
+						    <a href="update.php?id=<?php echo $rowid;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons" style="color:#20B38D">&#xE254;</i></a>
+                            <a href="delete.php?id=<?php echo $rowid;?>"title="Eliminar" data-toggle="tooltip"><i class="material-icons" style="color:#922B21">delete_forever</i></a>
+                        </td>
                     </tr>
                     <?php
 					}

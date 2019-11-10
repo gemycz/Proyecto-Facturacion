@@ -1,3 +1,7 @@
+<?php 
+  //empty si no existe
+include "conexion.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
         <link rel="stylesheet" type="text/css" href="css/fontello.css">
@@ -19,6 +22,12 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
  
+ <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- jQuery UI library -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 </head>
 <body><br><br>
@@ -71,7 +80,7 @@
  <center> <form class="form-inline my-2 my-lg-0" method="POST" action="busqueda.php">
     	  	Ingrese el numero de Cedula:
       <input class="form-control mr-sm-2" type="search" name="buscar" id="buscar" placeholder="Search" aria-label="Search">
-      <button id="buscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      <button  class="btn btn-success" type="submit">Buscar</button>
     </form></center>
         
       <!--FORMULARIO REGISTRO-->
@@ -85,19 +94,64 @@
                 </div>
             </div>
             
-                      
-                
-					
+           
+      <script type="text/javascript">
+    $(function() {
+            $("#cedula").autocomplete({
+                source: "cargar_cliente.php",
+                minLength: 2,
+                select: function(event, ui) {
+          event.preventDefault();
+          $('#nombre').val(ui.item.nombre);
+          $('#direccion').val(ui.item.direccion);
+          $('#id_cliente').val(ui.item.id);
+          $('#cedula').val(ui.item.cedula);
+          $('#telefono').val(ui.item.telefono);
+          $('#email').val(ui.item.email);
+         
+           }
+            });
+    });
+</script>           
+
+      <script type="text/javascript">
+    $(function() {
+            $("#codigo_producto").autocomplete({
+                source: "cargar_producto.php",
+                minLength: 2,
+                select: function(event, ui) {
+          event.preventDefault();
+          $('#codigo_producto').val(ui.item.codigo_pro);
+          $('#nombre_producto').val(ui.item.nombre_pro);
+          $('#precio').val(ui.item.precio);
+          $('#stock').val(ui.item.cantidad_pro);
+          $('#id_producto').val(ui.item.id_pro);
+          
+           }
+            });
+    });
+
+</script>
+
+            		
 
             <div class="formulario-registro-factura">
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Cliente</p>
             <div class="row" >
 				
 				<form method="post">
+          <div class="col-md-6">
+          <label>Id Cliente:</label>
+          <input type="text" name="id_cliente" id="id_cliente" placeholder="Id... " class='form-control' maxlength="100" required >
+        </div>
 				<div class="col-md-6">
 					<label>Nombres:</label>
 					<input type="text" name="nombre" id="nombre" placeholder="Nombre... " class='form-control' maxlength="100" required >
 				</div>
+        <div class="col-md-6">
+          <label>Cedula:</label>
+          <input type="text" name="cedula" id="cedula" placeholder="Cedula... " class='form-control' maxlength="100" required >
+        </div>
 				<div class="col-md-6">
 					<label>Dirección:</label>
 					<input  type="text" name="direccion" id="direccion" placeholder="Dirección... " class='form-control' maxlength="100" required >
@@ -119,18 +173,44 @@
 					
 				</div>
 			
-				<div class="col-md-6"t">
 				
-					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Guardar datos</button>
-				</div>
 				
 			</div>
+
 			<hr>
+			 
+             <?php 
+                 $query_pro = mysqli_query($conn,"SELECT id_pro, codigo_pro, cantidad_pro FROM producto");
+                 $result_pro = mysqli_num_rows($query_pro);
+            ?>
+             <select name="producto" id="producto"> 
+            <?php 
+            if($result_pro > 0){
+                   
+                 while($pro = mysqli_fetch_array($query_pro)){
+                     
+
+                     
+                     ?>
+                    
+                     <option value="<?php echo $pro["id_pro"]; ?>"><?php echo $pro["codigo_pro"]; ?></option>
+                <?php 
+                   }
+                ?>
+                 
+                   <input type="text" name="cantidad" id="cantidad" value="<?php echo $pro["cantidad_pro"]; ?>">
+                <?php 
+                 }
+                 ?>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Producto</p>
+            Id: <input type="text" name="id_producto" id="id_producto" >
+              Stock: <input type="text" name="stock" id="stock" ><br>
+            Nombre: <input type="text" name="nombre_producto" id="nombre_producto" >
+             Precio: <input type="text" name="precio" id="precio" >
            <div class="row">
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-					<label>Codigo:</label>
-					<input  type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
+					<label>C�digo:</label>
+					<input  type="text" name="codigo_producto" id="codigo_producto" class='form-control' maxlength="100" required >
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Cantidad:</label>
@@ -143,10 +223,12 @@
 				</div>
 			</div>
 				</form>
-            <br>
-            <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
-            
-            <div class="detalles">
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="row" style="background: white;">
+              <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
+
+               <div class="detalles">
                <table id="tablafactura">
                
                 <tr>
@@ -185,10 +267,13 @@
                 </tr>
                 </table>
             </div>
+            </div>
+            
+            
+           
             <!--TOTALES-->
             FALTA LOS TOTALES
-            </form>
-            </div>     
+            
         </div>
         </div>
                    

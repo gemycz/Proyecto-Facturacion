@@ -88,15 +88,24 @@
 					$precio = $producto->sanitize($_POST['precio']);
 							
 					
-					$res = $producto->createPro($nomPro,$codigo,$cantidad,$precio);
-					if($res){
-						$message= "Datos insertados con éxito";
-						$class="alert alert-success";
+					$resi=$producto->buscarPro($codigo);
+					//consulta de la variable quuery
+					if($resi){
+					    $message="El producto ya existe.";
+					    $class="alert alert-danger";
+					    
 					}else{
-						$message="No se pudieron insertar los datos";
-						$class="alert alert-danger";
+					    //registro de los datos
+					    $res = $producto->createPro($nomPro,$codigo,$cantidad,$precio);
+					    if($res){
+					        $message= "Datos insertados con éxito";
+					        $class="alert alert-success";
+					    }else{
+					        $message="No se pudieron insertar los datos";
+					        $class="alert alert-danger";
+					    }
 					}
-					
+				
 					?>
 				<div class="<?php echo $class?>">
 				  <?php echo $message;?>

@@ -89,31 +89,81 @@
                 
 				<?php 
                 $buscar=$_POST['buscar'];
+                
 				include ('database.php');
 
-				$producto = new Database();
-				$listado=$producto->buscarPro($buscar);
+				$clientes = new Database();
+				$listado=$clientes->buscar_cedula($buscar);
+				
 				?>
                 
 				<?php 
 					while ($row=mysqli_fetch_object($listado)){
-					    $rowid=$row->id_pro;
-					    $nombre=$row->nombre_pro;
-					    $codigo=$row->codigo_pro;
-					    $cantidad=$row->cantidad_pro;
-					    $precio=$row->precio_pro;
-					    
+					    $rowid=$row->id_cli;
+					    $nombre=$row->nombre_cli;
+					    $direccion=$row->direccion_cli;
+					    $telefono=$row->telefono_cli;
+					    $cedula=$row->cedula_cli;
+					    $email=$row->email_cli;
 				?>
 					
 
+            <div class="formulario-registro-factura">
+            <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Cliente</p>
+            <div class="row" >
+				
+				<form method="post">
+				<div class="col-md-6">
+					<label>Nombres:</label>
+					<input value="<?php echo $nombre;?>" type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
+				</div>
+				<div class="col-md-6">
+					<label>Dirección:</label>
+					<input value="<?php echo $direccion;?>" type="text" name="direccion" id="direccion" class='form-control' maxlength="100" required >
+				</div>
+				<div class="col-md-6">
+					<label>Teléfono</label>
+					<input value="<?php echo $telefono;?>" type="tel" size="10" pattern="[0-9]{10}" placeholder="Ej.: 0999999999" name="telefono" id="telefono" class='form-control' maxlength="100" required >
+				</div>
+				
+				<div class="col-md-6">
+					<label>Email:</label>
+					<input value="<?php echo $email;?>" type="email" placeholder="Ej.: usuario@servidor.com" name="email" id="email" class='form-control' maxlength="100" required>
+				</div>
+				
+				<div class="col-md-6">
+					<label>Fecha:</label>
+					
+					<input class='form-control' type="date" name="fecha" placeholder="Fecha... ">
+					
+				</div>
+			
+				
+				<?php
+					}
+				?>
+            </form>
             
+			</div>
+			
+			
+			 <!--Busqueda de producto-->
+			
+			 
 			<hr>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Producto</p>
+          <form method="post" >
+          
+           
            <div class="row">
+           <form class="form-inline my-2 my-lg-0" method="POST" action="busquedaPro.php">
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Codigo:</label>
-					<input  type="text" name="nombre" id="nombre" class='form-control' maxlength="100" required >
-				</div>
+	
+    			  <input class="form-control mr-sm-2"  name="buscarPro" id="buscarPro" >
+   		
+		</div>
+		
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 					<label>Cantidad:</label>
 					<input type="number" name="cantidad" placeholder="Cantidad... " class='form-control' maxlength="100" required >
@@ -121,27 +171,52 @@
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
 				
-					<button type="submit" id="boton" class="btn btn-success" onclick="validar()" >Ingresar</button>
+					<button id="buscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+					
 				</div>
-			</div>
 				</form>
+			</div>
+			
+			
             <br>
             <p style="position: relative; top: 10px; left:-280px; font-size:17px;">Detalles</p>
             
+            <?php 
+                
+                $buscarPro=$_POST['buscarPro'];
+				include ('databasePro.php');
+
+				$producto = new Database1();
+				
+				$listadoPro=$producto->buscarPro($buscarPro);
+				?>
+            
+            <?php 
+					while ($row=mysqli_fetch_object($listadoPro)){
+					    $rowid=$row->id_pro;
+						$nombre=$row->nombre_pro;
+						$codigo=$row->codigo_pro;
+						$cantidad=$row->cantidad_pro;
+						$precio=$row->precio_pro;
+
+                        
+				?>
             <div class="detalles">
                <table id="tablafactura">
                
                 <tr>
-                    <th>Cantidad</th>
-                    <th>Decripción</th>
-                    <th>Valor Unitario</th>
-                    <th>Valor Total</th>
-                </tr>
-                <tr>
-                   <td><?php echo $nombre;?></td>
+                    <th><?php echo $rowid;?></th>
+                        <td><?php echo $nombre;?></td>
                         <td><?php echo $codigo;?></td>
                         <td><?php echo $cantidad;?></td>
 						<td><?php echo $precio;?></td>
+                </tr>
+                <tr>
+                        <td>......</td>
+                        <td></td>
+                                          
+						<td></td>
+						 <td>......</td>
 
                 </tr>
                 <tr>
@@ -166,19 +241,21 @@
 
                 </tr>
                 </table>
+                 <?php
+					}
+				?>
             </div>
             <!--TOTALES-->
             FALTA LOS TOTALES
-            </form>
-            </div>     
+              
+           </form>
+            </div>  
+            
         </div>
         </div>
                    
                    
-				<?php
-					}
-				?>
-                    
+				
                     
                           
                
@@ -188,6 +265,9 @@
     </div>
  </div>
   </div>
+  
+  
+  
 <!--PIE DE PAGINA-->
         <footer>
             <div class="footer1">

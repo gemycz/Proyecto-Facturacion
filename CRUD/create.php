@@ -94,15 +94,33 @@
 					$cedula = $clientes->sanitize($_POST['cedula']);
 					$email = $clientes->sanitize($_POST['email']);
 					
+
 					
-					$res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email);
-					if($res){
-						$message= "Datos insertados con éxito";
-						$class="alert alert-success";
+				
+					//consulta de la variable quuery
+					
+					if($clientes->validar($cedula)){
+					    $message="El usuario o correo ya existe.";
+					    $class="alert alert-danger";
+					   
+					  
 					}else{
-						$message="No se pudieron insertar los datos";
-						$class="alert alert-danger";
+					    //registro de los datos
+					    $res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email);
+					    
+					    if($res){
+					        
+					        $message= "Datos insertados con éxito";
+					        $class="alert alert-success";
+					        unset($resi);
+					    }else{
+					        
+					        $message="No se pudieron insertar los datos";
+					        $class="alert alert-danger";
+					    }
 					}
+					
+					
 					
 					?>
 				<div class="<?php echo $class?>">
