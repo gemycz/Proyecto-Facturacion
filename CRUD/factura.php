@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    
+} else {
+    
+    header('Location: http://localhost/Proyeto-Facturacion/CRUD/login_php/login.php');//redirige a la pÃ¡gina de login si el usuario quiere ingresar sin iniciar sesion
+    
+    
+    exit;
+}
+
+$now = time();
+
+if($now > $_SESSION['expire']) {
+    session_destroy();
+    header('Location: http://localhost/Proyeto-Facturacion/CRUD/login_php/login.php');//redirige a la pÃ¡gina de login, modifica la url a tu conveniencia
+    echo "Tu sesion a expirado,
+<a href='login.php'>Inicia Sesion</a>";
+    exit;
+}
+?>
+
 <?php 
   //empty si no existe
 include "conexion.php";

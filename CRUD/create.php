@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    
+} else {
+    
+    header('Location: http://localhost/Proyeto-Facturacion/CRUD/login_php/login.php');//redirige a la pÃƒÂ¡gina de login si el usuario quiere ingresar sin iniciar sesion
+    
+    
+    exit;
+}
+
+$now = time();
+
+if($now > $_SESSION['expire']) {
+    session_destroy();
+    header('Location: http://localhost/Proyeto-Facturacion/CRUD/login_php/login.php');//redirige a la pÃƒÂ¡gina de login, modifica la url a tu conveniencia
+    echo "Tu sesion a expirado,
+<a href='login.php'>Inicia Sesion</a>";
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +123,7 @@
 					//consulta de la variable quuery
 					
 					if($clientes->validar($cedula)){
-					    $message="El usuario o correo ya existe.";
+					    $message="El usuario ya existe.";
 					    $class="alert alert-danger";
 					   
 					  
