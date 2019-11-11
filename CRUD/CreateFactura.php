@@ -20,6 +20,7 @@ if($now > $_SESSION['expire']) {
 <a href='login.php'>Inicia Sesion</a>";
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

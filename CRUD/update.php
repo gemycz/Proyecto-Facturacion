@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta  charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Modificar Datos</title>
@@ -20,8 +20,46 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <link rel="stylesheet" type="text/css" href="css/fontello.css">
+        <script type="text/javascript" src="js/componentes.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+
 </head>
 <body><br><br>
+
+ <!--CABECERA-->
+    <header id="cabecera" style="background: url(img/banner.png)">
+        <img src="img/logo.png" width="600">
+    </header>
+    
+       <!--MENU-->
+        <nav id="menu">
+            <ul>
+              <li><a class="icon-home" href="index.php">Inicio</a></li>
+              <!--<li><a href="#">Cliente</a></li>-->
+              <li class="icon-user-add">Registro <i class="fas fa-angle-down"></i> 
+                <ul>
+                  <li><a class="icon-user" href="create.php">Cliente</a></li>
+                  <li><a class="icon-shopping-bag" href="createPro.php">Producto</a></li>
+                  <!--
+                  <li><a href="#">texto</a></li>
+                  <li><a href="#">texto</a></li>
+                  -->
+                </ul>
+              </li>
+             
+              <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
+               <li><a class="icon-doc-text-inv" href="ListaCliente.php">Lista de clientes</a></li>
+               <li><a class="icon-doc-text-inv" href="indexPro.php">Lista de Productos</a></li>
+            </ul>
+        </nav>
+  
+  <div id="contenido" style="background: url(img/backgroundblue.png)">
+        <div class="title-contenido">
+        <h2>Actualizar Datos del Cliente</h2>
+        </div>
 	
     <div class="container">
         <div class="table-wrapper">
@@ -49,7 +87,7 @@
 					$id=intval($_POST['id']);
 					$res = $clientes->create($nombre,$direccion,$telefono,$cedula,$email,$id);
 					if($res){
-						$message= "Datos actualizados con Ã©xito";
+						$message= "Datos actualizados con Éxito";
 						$class="alert alert-success";
 						
 					}else{
@@ -103,6 +141,55 @@
 				</form>
 			</div>
         </div>
-    </div>     
+    </div>
+    </div>
+    
+     <!--PIE DE PAGINA-->
+        <footer>
+            <div class="footer1">
+                <div id="Joshua">
+                    <h4>Joshua Ramirez</h4>
+                    <p style="margin: 0px; text-align: center">Contactos</p>
+                    <!--<hr style="margin: 0px; padding: 0px; border-top: 0.5px dashed">-->
+                    <div class="social">
+                    <a class="icon-facebook-official"></a>
+                    <a class="icon-instagram"></a>
+                    <a class="icon-youtube-play"></a>
+                    <a class="icon-mail-alt"></a>
+                    </div>
+                </div>
+                <div id="Gema">
+                    <h4>Gema Castillo</h4>
+                    <p style="margin: 0px; text-align: center">Contactos</p>
+                    <!--<hr style="margin: 0px; padding: 0px; border-top: 0.5px dashed">-->
+                    <div class="social">
+                    <a class="icon-facebook-official"></a>
+                    <a class="icon-instagram"></a>
+                    <a class="icon-youtube-play"></a>
+                    <a class="icon-mail-alt"></a>
+                    </div>
+                </div>
+                <div id="Angie">
+                    <h4>Angie Moyota</h4>
+                    <p style="margin: 0px; text-align: center">Contactos</p>
+                    <!--<hr style="margin: 0px; padding: 0px; border-top: 0.5px dashed">-->
+                    <div class="social">
+                    <a class="icon-facebook-official"></a>
+                    <a class="icon-instagram"></a>
+                    <a class="icon-youtube-play"></a>
+                    <a class="icon-mail-alt"></a>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="footer2">
+             <div id="UFAESPE">
+                    <h4 style="text-align: center">UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE</h4>
+                    <h5 style="text-align: center ; margin: 2px;">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN</h5>
+                    <h5 style="text-align: center; margin: 0px;">DESARROLLO WEB</h5>
+                </div>
+                <p>2019 &copy; FactuRappi. Todos los derechos reservados.</p>
+            </div>
+        </footer>     
 </body>
 </html>                            

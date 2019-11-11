@@ -120,9 +120,9 @@ if($now > $_SESSION['expire']) {
                 </thead>
                 
 				<?php 
-				include ('databasePro.php');
-				$producto = new Database1();
-				$listado=$producto->read();
+				include ('database.php');
+				$producto = new Database();
+				$listado=$producto->readPro();
 				?>
                 <tbody>
 				<?php 

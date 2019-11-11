@@ -68,18 +68,7 @@ if($now > $_SESSION['expire']) {
                   -->
                 </ul>
               </li>
-              <!--
-              <li>Blog <i class="fas fa-angle-down"></i> 
-                <ul>
-                  <li><a href="#">HTML</a> <span>22 Posts</span></li>
-                  <li><a href="#">CSS</a> <span>16 Posts</span></li>
-                  <li><a href="#">JavaScript</a> <span>10 Posts</span></li>
-                  <li><a href="#">Python</a> <span>13 Posts</span></li>
-                  <li><a href="#">PHP</a> <span>10 Posts</span></li>
-                  <li><a href="#">Design</a> <span>21 Posts</span></li>
-                </ul>
-              </li>
-              -->
+             
               <li><a class="icon-doc-text-inv" href="factura.php">Factura</a></li>
                <li><a class="icon-doc-text-inv" href="ListaCliente.php">Lista de clientes</a></li>
                <li><a class="icon-doc-text-inv" href="indexPro.php">Lista de Productos</a></li>

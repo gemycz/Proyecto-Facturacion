@@ -168,7 +168,7 @@
                     <input  type="text" name="id_factura" id="id_factura" class='form-control' maxlength="100" required >
                 </div>
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-                    <label>Còdigo:</label>
+                    <label>CÃ²digo:</label>
                     <input  type="text" name="codigo_producto" id="codigo_producto" class='form-control' maxlength="100" required >
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
@@ -308,9 +308,7 @@ $iva=0.12;
             </div>
             
             
-           
-            <!--TOTALES-->
-            FALTA LOS TOTALES
+          
             
         </div>
         </div>
@@ -362,7 +360,7 @@ $iva=0.12;
             <div class="footer2">
              <div id="UFAESPE">
                     <h4 style="text-align: center">UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE</h4>
-                    <h5 style="text-align: center ; margin: 2px;">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN</h5>
+                    <h5 style="text-align: center ; margin: 2px;">INGENIERÃ�A EN TECNOLOGÃ�AS DE LA INFORMACIÃ“N</h5>
                     <h5 style="text-align: center; margin: 0px;">DESARROLLO WEB</h5>
                 </div>
                 <p>2019 &copy; FactuRappi. Todos los derechos reservados.</p>

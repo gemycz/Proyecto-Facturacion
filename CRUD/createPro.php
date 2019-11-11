@@ -103,8 +103,8 @@ if($now > $_SESSION['expire']) {
             </div>
             <?php
             //$usuario,$nombres,$apellidos,$genero,$direccion,$telefono,$correo_electronico, $id
-				include ("databasePro.php");
-				$producto= new Database1();
+				include ("database.php");
+				$producto= new Database();
 
 				if(isset($_POST) && !empty($_POST)){
 				    $nomPro = $producto->sanitize($_POST['nomPro']);
@@ -115,13 +115,13 @@ if($now > $_SESSION['expire']) {
 					
 					
 					//consulta de la variable quuery
-					if($producto->validarPro($codigo) == 1){
+					if($producto->buscarPro($codigo) == 1){
 					    $message="El producto ya existe.";
 					    $class="alert alert-danger";
 					    
 					}else{
 					    //registro de los datos
-					    $res = $producto->create($nomPro,$codigo,$cantidad,$precio);
+					    $res = $producto->createPro($nomPro,$codigo,$cantidad,$precio);
 					    if($res){
 					        $message= "Datos insertados con éxito";
 					        $class="alert alert-success";
